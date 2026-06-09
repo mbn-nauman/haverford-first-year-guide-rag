@@ -157,26 +157,25 @@ def generate(query, top_k=4):
     chunks = retrieve(query, top_k=top_k)
 
     context_blocks = []
-    for i, chunk in enumerate(chunks):
-        context_blocks.append(
-            f"[Source {i+1}]\n"
-            f"Title: {chunk['title']}\n"
-            f"URL: {chunk['url']}\n"
-            f"Content: {chunk['text']}"
-        )
-    context = "\n\n".join(context_blocks)
+    for chunk in chunks:
+        context_blocks.append(chunk['text'])
+    context = "\n\n---\n\n".join(context_blocks)
 
     system_prompt = (
-        "You are a helpful assistant for Haverford College incoming first-years. "
-        "Answer the user's question using ONLY the information directly stated in the provided source chunks. "
-        "Do not use any outside knowledge. "
-        "Do not add interpretations, hedges, or commentary about what the documents do or do not explicitly say. "
-        "Only report facts that are clearly stated in the chunks. "
-        "If the chunks do not contain enough information to answer the question, "
-        'respond with exactly: "The answer to your question is not in our database."'
+        "You are a senior at Haverford College answering questions from an incoming first-year. "
+        "You have read some notes below. Use only what is in those notes to answer. "
+        "Speak naturally and directly — like you are texting a friend. "
+        "Give a clear answer in 2-4 sentences. "
+        "BAD example (never do this): 'According to Source 1, classes are hard. Source 2 implies...' "
+        "GOOD example (always do this): 'Classes are genuinely tough — most students find the workload heavy, "
+        "especially early on. The small class sizes help though, usually 5-20 people, so professors actually know you.' "
+        "Never mention sources, documents, or notes in your answer. Never use 'according to', 'it implies', "
+        "'it appears', 'Source 1', or any similar phrase. "
+        "If the notes don't contain enough to answer, reply with exactly: "
+        '"The answer to your question is not in our database."'
     )
 
-    user_prompt = f"Sources:\n\n{context}\n\nQuestion: {query}"
+    user_prompt = f"Use the following information to answer the question:\n\n{context}\n\nQuestion: {query}"
 
     client = Groq(api_key=os.getenv("GROQ_API_KEY"))
     response = client.chat.completions.create(
