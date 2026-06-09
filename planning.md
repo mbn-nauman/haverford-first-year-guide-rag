@@ -72,7 +72,7 @@ If cost was not a constraint then I would choose a stronger model which would ha
 |---|----------|-----------------|
 | 1 | How far are the apartments from Tritton Hall. | About 3 minutes of walk |
 | 2 | How many students are there in one class usually? | 5-20 students per class |
-| 3 | Does the customs program help build community and friends? | Yes, it helps build community and friends. |
+| 3 | How did first-years feel about the Customs program compared to their expectations before arriving? | They felt skeptical about it before coming but later found that it genuinely built community and one student described it as "sleepaway camp for college students" |
 | 4 | How should students manage classes at Haverford? | The classes are generally challenging so students should organize their schedule early, leave time for homework and exams, use weekends to catchup on the work. |
 | 5 | Do people eat dinner alone or with friends at Haverford? | Breakfast and Lunch are usually done alone at Haverford because of different schedules but dinner is more like a group activity. |
 
