@@ -1,7 +1,5 @@
 import streamlit as st
-from pipeline import generate
-
-NO_ANSWER = "The answer to your question is not in our database."
+from pipeline import generate, NO_ANSWER
 
 st.set_page_config(
     page_title="The Unofficial Haverford Guide",

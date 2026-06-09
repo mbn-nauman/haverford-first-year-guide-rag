@@ -153,8 +153,14 @@ def retrieve(query, top_k=4):
     return chunks
 
 
+NO_ANSWER = "The answer to your question is not in our database."
+DISTANCE_THRESHOLD = 0.7
+
 def generate(query, top_k=4):
     chunks = retrieve(query, top_k=top_k)
+
+    if not chunks or chunks[0]["distance"] > DISTANCE_THRESHOLD:
+        return {"answer": NO_ANSWER, "sources": []}
 
     context_blocks = []
     for chunk in chunks:
