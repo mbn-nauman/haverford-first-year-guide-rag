@@ -51,6 +51,60 @@ As my documents include reddit comments, student reviews etc, I chose a chunk si
 
 ---
 
+## Sample Chunks
+
+**Chunk 1** — Source: A Guide to Residential Life at Haverford
+> Tritton is all single dorms. It has four quadrants of 20 people who all have their own singles. The layout is kind of like a hotel; you walk down the halls and there are rooms to one side. Each group of 20 shares a common room (which has a big TV, couches, and a kitchenette), two bathrooms (4 showers and 6 stalls total), and a laundry room (two washers and two dryers). Tritton is generally regarded as one of the quieter dorms on campus.
+
+**Chunk 2** — Source: A Freshman Guide to Haverford College
+> Classes here are very challenging, and you would be taught by amazing professors who are passionate about teaching. Most classes are small, ranging anywhere from 5-20 people per class. Intro-level classes might be significantly larger in size, but the smaller setting allows for more student engagement. The professors can get to know you better, and you would not feel like another face in the class.
+
+**Chunk 3** — Source: Customs Gave Me a Community: A First-Year Perspective
+> In my experience at Haverford, the Customs program was integral in creating a welcoming environment. My good friend perfectly described this one-of-a-kind orientation as sleepaway camp for college students. Fun-filled activities consumed the day and night for the new students. After a hectic move-in, Customs began with a personal and sincere message from the President of the College herself, Wendy Raymond.
+
+**Chunk 4** — Source: Handle With Care: Is Our Dining Center Culture Healthy?
+> Since customs week it has been instilled in me that most Haverford students find it acceptable to go to breakfast or lunch alone, mainly because our daily schedules do not always match up with our friends' schedules. However, dinner at Haverford is a group activity. Many students I talked to have chosen the take-out option for dinner when they had no one to sit with, too uncomfortable with the idea of sitting alone at a large table.
+
+**Chunk 5** — Source: Freshmen Reflect on the First Month of College
+> Bi also attributed many newfound friendships to the active role she took in joining "clubs…to meet new people." Phoebe Hawthorne '29 was also appreciative of the many clubs and activities present on campus. Two freshmen, Logan White and Harry Kallen, also expressed gratitude for the kindness of people at Haverford, with Kallen saying, "I've never met this amount of nice people."
+
+---
+
+## Retrieval Test Results
+
+### Q1: How far are the apartments from Tritton Hall?
+
+| Rank | Distance | Source | Chunk preview |
+|------|----------|--------|---------------|
+| 1 | 0.4273 | A Guide to Residential Life at Haverford | "...if it was possible to get floor plans for the residence halls. I was able to look at the blueprints for Tritton because the architectural firm has published them online..." |
+| 2 | 0.4548 | A Guide to Residential Life at Haverford | "...Kim Hall: Mirror image of Tritton... HCA (Haverford Apartments): Located on the southernmost end of campus..." |
+| 3 | 0.4788 | A Guide to Residential Life at Haverford | "A Guide to Residential Life at Haverford. When arriving at Haverford, I wanted to know as much about the dorms as possible..." |
+| 4 | 0.5127 | A Guide to Residential Life at Haverford | "Tritton is all single dorms. It has four quadrants of 20 people who all have their own singles..." |
+
+---
+
+### Q2: How many students are there in one class usually?
+
+| Rank | Distance | Source | Chunk preview |
+|------|----------|--------|---------------|
+| 1 | 0.3654 | A Freshman Guide to Haverford College | "...ranging anywhere from 5-20 people per class. Intro-level classes might be significantly larger in size, but the smaller setting allows for more student engagement..." |
+| 2 | 0.5428 | A Guide to Residential Life at Haverford | "Tritton is all single dorms. It has four quadrants of 20 people who all have their own singles..." |
+| 3 | 0.5625 | Handle With Care: Is Our Dining Center Culture Healthy? | "...simply less stressful with 50 people around you, as opposed to 250..." |
+| 4 | 0.5726 | Handle With Care: Is Our Dining Center Culture Healthy? | "...dinner at Haverford is a group activity. Many students I talked to have chosen the take-out option for dinner..." |
+
+---
+
+### Q4: How should students manage classes at Haverford?
+
+| Rank | Distance | Source | Chunk preview |
+|------|----------|--------|---------------|
+| 1 | 0.3186 | A Freshman Guide to Haverford College | "Classes at Haverford are definitely very challenging, and you are taught by some of the best professors out there..." |
+| 2 | 0.3235 | A Freshman Guide to Haverford College | "...I think my most important advice is this: Go into Haverford with an open mind and make the journey your own." |
+| 3 | 0.3529 | A Freshman Guide to Haverford College | "...taking classes at University of Pennsylvania requires more planning. Study spots on campus: Lutnick Library is often packed, but some other amazing spots are the Science Library, CPGC Cafe in Stokes..." |
+| 4 | 0.3647 | Reddit QnA about Haverford | "Haverford does foster an environment that is open to civil debate... Food is okay, there's one dining hall and then the Coop..." |
+
+---
+
 ## Embedding Model
 
 **Model used:**
@@ -78,11 +132,8 @@ The source attribution (or citations) are not left to the LLM to do. Instead, we
 | 1 | How far are the apartments from Tritton Hall. | About 3 minutes of walk |Distance not specified in documents. (summarized using Claude) | Partially relevant, they are from the right document but do not contain the correct chunk for the answer | Inaccurate, the system said that the distance is not specified but it is in the document which makes it a retreival error and not a generation error. |
 | 2 | How many students are there in one class usually? | 5-20 students per class | 5-20 students per class; intro courses may be larger. (summarized using Claude) | Partially Relevant, the first chunk is the exact one with the answer in it. The other three chunks are off topic. They most probably were retreived because they had words like "students" and "people". | Accurate, the LLM got the answer exactly right. It got the answer from the top chunk and ignored the rest of them. |
 | 3 | How did first-years feel about the Customs program compared to their expectations before arriving? | They felt skeptical about it before coming but later found that it genuinely built community and one student described it as "sleepaway camp for college students" | Skeptical beforehand, but pleasantly surprised — Customs genuinely built community, described as 'sleepaway camp for college students. (summarized using Claude) | Relevant, all distances are pretty low and contain the direct answer to the question. | Accurate, the answer is fully accurate according to the chunks the LLM received and the expected answer. | 
-| 4 | How should students manage classes at Haverford? | The classes are generally challenging so students should organize their schedule early, leave time for homework and exams, use weekends to catchup on the work. | Plan schedule early, account for Penn transport time if cross-registering, and find a good study spot like the Science Library or CPGC Cafe. | Partially Relevant, 2 out of the 4 chunks were useful. The first and third chunk had the information we needed, while the second and fourth chunk were too vague or off-topic. | Partially Accurate, the answer is correct but not the same as the expected answer. The LLM took the right information from the correct chunks and ignored the vage/off-topic ones, but it was not the answer we expected.
-| 5 | Do people eat dinner alone or with friends at Haverford? | Breakfast and Lunch are usually done alone at Haverford because of different schedules but dinner is more like a group activity. |
-
-**Retrieval quality:** Relevant / Partially relevant / Off-target  
-**Response accuracy:** Accurate / Partially accurate / Inaccurate
+| 4 | How should students manage classes at Haverford? | The classes are generally challenging so students should organize their schedule early, leave time for homework and exams, use weekends to catchup on the work. | Plan schedule early, account for Penn transport time if cross-registering, and find a good study spot like the Science Library or CPGC Cafe. (summarized using Claude) | Partially Relevant, 2 out of the 4 chunks were useful. The first and third chunk had the information we needed, while the second and fourth chunk were too vague or off-topic. | Partially Accurate, the answer is correct but not the same as the expected answer. The LLM took the right information from the correct chunks and ignored the vage/off-topic ones, but it was not the answer we expected. 
+| 5 | Do people eat dinner alone or with friends at Haverford? | Breakfast and Lunch are usually done alone at Haverford because of different schedules but dinner is more like a group activity. | Dinner is a group activity — students arrive with friends, often post-sports practice. Eating alone feels uncomfortable; some take-out to avoid it. (summarized using Claude) | Relevant, as all 4 chunks are from the right document and with the lowest distance when compared to the other 4 questions before this. | Partially Accurate, it answered the part about dinner but missed the breakfast and lunch part. | 
 
 ---
 

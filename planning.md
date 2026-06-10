@@ -88,7 +88,7 @@ As my documents are all student written scattered over the internet on different
 ## Architecture
 
 Document Ingestion → Python loaders and cleaned source files
-Chunking → Fixed size chunking with each chunk of 1000 characters with a 200 character overlap
+Chunking → Fixed size chunking with each chunk of 500 characters with a 100 character overlap
 Embedding + Vector Store → all-MiniLM-L6-v2 via sentence-transformers + ChromaDB
 Retrieval → ChromaDB search with top-k = 4
 Generation → GrokAPI: llama-3.3-70b-versatile, citations must be added in the answer
