@@ -31,17 +31,12 @@ Haverford College incoming first-year survival guide. This information is genera
 
 ## Chunking Strategy
 
-<!-- How will you split documents into chunks?
-     State your chunk size (in tokens or characters), overlap size, and explain why those
-     numbers fit the structure of your documents.
-     A review-heavy corpus warrants different chunking than a long FAQ. -->
-
 **Chunk size:**
-300 characters
+500 characters
 **Overlap:**
-50 characters
+100 characters
 **Reasoning:**
-As my documents include reddit comments, student reviews etc, I chose a chunk size of 1000 and overlap of 200 so that it is big enough to extract the student's experience and small enough to preserve the context. 
+As my documents include reddit comments, student reviews etc, I chose a chunk size which is big enough to extract the student's experience and small enough to preserve the context. I first tried 1000 characters with 200 character overlap but that was leading to the retreival of chunks with high distances. So, I then tested multiple different pairs of chunk size and overlap size to choose the best one. I tested chunk sizes of 1000, 300, 700, and 500. In the end, I concluded that 500 was the best one because it retreived the comparitively lowest distance for the chunks.
 
 ---
 

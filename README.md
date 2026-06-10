@@ -57,23 +57,17 @@ As my documents include reddit comments, student reviews etc, I chose a chunk si
 all-MiniLM-L6-v2 via sentence-transformers
 
 **Production tradeoff reflection:**
-If cost was not a constraint then I would choose a stronger model which would have a higher context length and accuracy on domain-specific text as my sources are messy reddit threads and student reviews. That would make my output answers more accurate. Also, I would go for a multilingual model too because that would give the user option to ask question in another language and while giving answer, the LLM can translate the answer into the langaue the user asked the question in.
+If cost was not a constraint then I would choose a stronger model which would have a higher context length and accuracy on domain-specific text as my sources are messy reddit threads and student reviews. That would make my output answers more accurate. Also, I would go for a multilingual model too because that would give the user option to ask question in another language and while giving answer, the LLM can translate the answer into the langauge the user asked the question in.
 
 ---
 
 ## Grounded Generation
 
-<!-- Explain how your system enforces grounding — how does it prevent the LLM from answering
-     beyond the retrieved documents?
-     Describe both your system prompt (what instruction you gave the model) and any structural
-     choices (e.g., how you formatted the context, whether you filtered low-relevance chunks).
-     Do not just say "I told it to use the documents" — show the actual instruction or explain
-     the mechanism. -->
-
 **System prompt grounding instruction:**
-
+The system prompt tells the model to act like a senior Haverford College student. It tells the model to only use the notes (top-k chunks) it has been given to give the answer to the query. The model is also told to speak directly and like a friend and is explicitly told not to use phrases like "according to", "Source 1" etc. These explicit phrases were added later because when in testing, it was seen that the model was giving citations within the answer. The model is also told to not to give its own interpretation like "this implies.." as the model was doing it when the it was being tested. In the end the model is strictly told to answer with ""The answer to your question is not in our database" when the answer is not in the chunks. If the top most chunk (as my chunks are ordered by increasing distance) has a distance of greater than 0.7, then the LLM is never called. Instead an automatic response of the same line "The answer to your question is not in our database" is given. This was done so the LLM does not hallucinate the answer.
 
 **How source attribution is surfaced in the response:**
+The source attribution (or citations) are not left to the LLM to do. Instead, we do it programmatically. After the generation by the LLM is done, the code extracts the title of the document and its URL from the metadata of the chunks and uses those to build a source list in Python. This list then appears as embedded links in the Streamlit UI beneath the answer. 
 
 ---
 
