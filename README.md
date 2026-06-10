@@ -54,19 +54,24 @@ As my documents include reddit comments, student reviews etc, I chose a chunk si
 ## Sample Chunks
 
 **Chunk 1** — Source: A Guide to Residential Life at Haverford
-> Tritton is all single dorms. It has four quadrants of 20 people who all have their own singles. The layout is kind of like a hotel; you walk down the halls and there are rooms to one side. Each group of 20 shares a common room (which has a big TV, couches, and a kitchenette), two bathrooms (4 showers and 6 stalls total), and a laundry room (two washers and two dryers). Tritton is generally regarded as one of the quieter dorms on campus.
+
+Tritton is all single dorms. It has four quadrants of 20 people who all have their own singles. The layout is kind of like a hotel; you walk down the halls and there are rooms to one side. Each group of 20 shares a common room (which has a big TV, couches, and a kitchenette), two bathrooms (4 showers and 6 stalls total), and a laundry room (two washers and two dryers). Tritton is generally regarded as one of the quieter dorms on campus.
 
 **Chunk 2** — Source: A Freshman Guide to Haverford College
-> Classes here are very challenging, and you would be taught by amazing professors who are passionate about teaching. Most classes are small, ranging anywhere from 5-20 people per class. Intro-level classes might be significantly larger in size, but the smaller setting allows for more student engagement. The professors can get to know you better, and you would not feel like another face in the class.
+
+Classes here are very challenging, and you would be taught by amazing professors who are passionate about teaching. Most classes are small, ranging anywhere from 5-20 people per class. Intro-level classes might be significantly larger in size, but the smaller setting allows for more student engagement. The professors can get to know you better, and you would not feel like another face in the class.
 
 **Chunk 3** — Source: Customs Gave Me a Community: A First-Year Perspective
-> In my experience at Haverford, the Customs program was integral in creating a welcoming environment. My good friend perfectly described this one-of-a-kind orientation as sleepaway camp for college students. Fun-filled activities consumed the day and night for the new students. After a hectic move-in, Customs began with a personal and sincere message from the President of the College herself, Wendy Raymond.
+
+In my experience at Haverford, the Customs program was integral in creating a welcoming environment. My good friend perfectly described this one-of-a-kind orientation as sleepaway camp for college students. Fun-filled activities consumed the day and night for the new students. After a hectic move-in, Customs began with a personal and sincere message from the President of the College herself, Wendy Raymond.
 
 **Chunk 4** — Source: Handle With Care: Is Our Dining Center Culture Healthy?
-> Since customs week it has been instilled in me that most Haverford students find it acceptable to go to breakfast or lunch alone, mainly because our daily schedules do not always match up with our friends' schedules. However, dinner at Haverford is a group activity. Many students I talked to have chosen the take-out option for dinner when they had no one to sit with, too uncomfortable with the idea of sitting alone at a large table.
+
+Since customs week it has been instilled in me that most Haverford students find it acceptable to go to breakfast or lunch alone, mainly because our daily schedules do not always match up with our friends' schedules. However, dinner at Haverford is a group activity. Many students I talked to have chosen the take-out option for dinner when they had no one to sit with, too uncomfortable with the idea of sitting alone at a large table.
 
 **Chunk 5** — Source: Freshmen Reflect on the First Month of College
-> Bi also attributed many newfound friendships to the active role she took in joining "clubs…to meet new people." Phoebe Hawthorne '29 was also appreciative of the many clubs and activities present on campus. Two freshmen, Logan White and Harry Kallen, also expressed gratitude for the kindness of people at Haverford, with Kallen saying, "I've never met this amount of nice people."
+
+Bi also attributed many newfound friendships to the active role she took in joining "clubs…to meet new people." Phoebe Hawthorne '29 was also appreciative of the many clubs and activities present on campus. Two freshmen, Logan White and Harry Kallen, also expressed gratitude for the kindness of people at Haverford, with Kallen saying, "I've never met this amount of nice people."
 
 ---
 
@@ -122,6 +127,53 @@ The system prompt tells the model to act like a senior Haverford College student
 
 **How source attribution is surfaced in the response:**
 The source attribution (or citations) are not left to the LLM to do. Instead, we do it programmatically. After the generation by the LLM is done, the code extracts the title of the document and its URL from the metadata of the chunks and uses those to build a source list in Python. This list then appears as embedded links in the Streamlit UI beneath the answer.
+
+---
+
+## Example Responses
+
+**Response 1 — Q2: How many students are there in one class usually?**
+
+Classes at Haverford usually have 5-20 people, which allows for more student engagement and lets professors get to know you better. Intro-level classes might be a bit larger, but overall, the small class sizes are a big part of the college experience here.
+
+Sources: [A Freshman Guide to Haverford College](https://generalintelligences.wordpress.com/2020/05/16/a-freshman-guide-to-haverford-college/)
+
+---
+
+**Response 2 — Q3: How did first-years feel about the Customs program?**
+
+Before arriving, some first-years didn't believe Haverford was as welcoming as people said, but after experiencing the Customs program, they felt it really helped create a sense of community. The program was described as "sleepaway camp for college students" with fun-filled activities that made the transition to college life easier. Overall, it seems that first-years were pleasantly surprised by how welcoming the community was, exceeding their initial expectations.
+
+Sources: [Customs Gave Me a Community: A First-Year Perspective](https://haverfordclerk.com/customs-gave-me-a-community-a-first-year-perspective/)
+
+---
+
+**Out-of-scope refusal — What is the GPA requirement to keep my scholarship?**
+
+The answer to your question is not in our database.
+
+*(No sources shown — the distance threshold check blocked the LLM from being called at all.)*
+
+---
+
+## Query Interface
+
+**Input field:**
+A chat text box at the bottom of the screen labeled "Ask anything about Haverford..." — the user types a question and presses Enter to submit.
+
+**Output fields:**
+- The assistant's response appears in a chat bubble with a 🐿️ squirrel avatar above the input box.
+- A collapsible "Sources" expander appears below the response containing clickable links (title + URL) to the source documents the answer was drawn from. The expander is hidden when the system returns the no-answer response.
+
+**Sample interaction transcript:**
+
+**User:** Do people eat dinner alone or with friends at Haverford?
+
+**🐿️ Assistant:** At Haverford, dinner is usually a group activity, and most students arrive with multiple friends, often after practicing with their sports teams. Many students feel uncomfortable eating dinner alone, especially in the Dining Center where tables are large, and some even opt for take-out if they don't have someone to sit with. It's pretty common for students to eat dinner with friends, and feeling self-conscious about eating alone in that environment is pretty normal.
+
+▾ Sources
+- [Handle With Care: Is Our Dining Center Culture Healthy?](https://haverfordclerk.com/handle-with-care-is-our-dining-center-culture-healthy/)
+- [Haverford vs Bryn Mawr Dining Halls](https://bicollegenews.com/2019/10/05/opinion-haverford-vs-bryn-mawrs-dining-halls/)
 
 ---
 
