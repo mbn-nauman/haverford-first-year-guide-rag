@@ -73,17 +73,13 @@ The source attribution (or citations) are not left to the LLM to do. Instead, we
 
 ## Evaluation Report
 
-<!-- Run your 5 test questions from planning.md through your system and record the results.
-     Be honest — a partially accurate or inaccurate result that you explain well is more
-     valuable than a suspiciously perfect result. -->
-
 | # | Question | Expected answer | System response (summarized) | Retrieval quality | Response accuracy |
 |---|----------|-----------------|------------------------------|-------------------|-------------------|
-| 1 | | | | | |
-| 2 | | | | | |
-| 3 | | | | | |
-| 4 | | | | | |
-| 5 | | | | | |
+| 1 | How far are the apartments from Tritton Hall. | About 3 minutes of walk |Distance not specified in documents. (summarized using Claude) | Partially relevant, they are from the right document but do not contain the correct chunk for the answer | Inaccurate, the system said that the distance is not specified but it is in the document which makes it a retreival error and not a generation error. |
+| 2 | How many students are there in one class usually? | 5-20 students per class | 5-20 students per class; intro courses may be larger. (summarized using Claude) | Partially Relevant, the first chunk is the exact one with the answer in it. The other three chunks are off topic. They most probably were retreived because they had words like "students" and "people". | Accurate, the LLM got the answer exactly right. It got the answer from the top chunk and ignored the rest of them. |
+| 3 | How did first-years feel about the Customs program compared to their expectations before arriving? | They felt skeptical about it before coming but later found that it genuinely built community and one student described it as "sleepaway camp for college students" | Skeptical beforehand, but pleasantly surprised — Customs genuinely built community, described as 'sleepaway camp for college students. (summarized sing Claude) | Relevant, all distances are pretty low and contain the direct answer to the question. | Accurate, the answer is fully accurate according to the chunks the LLM received and the expected answer. | 
+| 4 | How should students manage classes at Haverford? | The classes are generally challenging so students should organize their schedule early, leave time for homework and exams, use weekends to catchup on the work. | 
+| 5 | Do people eat dinner alone or with friends at Haverford? | Breakfast and Lunch are usually done alone at Haverford because of different schedules but dinner is more like a group activity. |
 
 **Retrieval quality:** Relevant / Partially relevant / Off-target  
 **Response accuracy:** Accurate / Partially accurate / Inaccurate
